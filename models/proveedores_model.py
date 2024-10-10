@@ -40,7 +40,8 @@ class ProveedorModel:
         except SQLAlchemyError as e:
             print(f"Error al obtener proveedor: {e}")
             return None
-
+    
+    
     def actualizar_proveedor(self, id, ruc, nombre, telefono=None, email=None, direccion=None):
         try:
             sesion = self.session()
@@ -56,6 +57,20 @@ class ProveedorModel:
         except SQLAlchemyError as e:
             print(f"Error al actualizar proveedor: {e}")
             return False
+        
+    def buscar_proveedores(self, termino):
+        try:
+            sesion = self.session()
+            proveedores = sesion.query(Proveedor).filter(
+                (Proveedor.ruc.like(f"%{termino}%")) | 
+                (Proveedor.nombre.like(f"%{termino}%"))
+            ).all()
+            sesion.close()
+            return proveedores
+        except SQLAlchemyError as e:
+            print(f"Error al buscar proveedores: {e}")
+            return None
+
 
     def eliminar_proveedor(self, id):
         try:

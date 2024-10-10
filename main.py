@@ -66,8 +66,8 @@ class MainWindow(QMainWindow):
             sub_window.destroyed.connect(lambda: self.open_subwindows.remove(title))
 
             # Crear el controlador si es necesario
-            if isinstance(sub_window, ConsultaProveedores):
-                ProveedorController(sub_window)
+            '''if isinstance(sub_window, ConsultaProveedores):
+                ProveedorController(sub_window)'''
 
     def raise_subwindow(self, title: str):
         for sub in self.mdi.subWindowList():
